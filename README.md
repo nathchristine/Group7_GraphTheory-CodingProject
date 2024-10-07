@@ -113,3 +113,11 @@ cout << "Cost: " << min_cost << endl;
 * 
 
 ## Knight Tour
+
+```
+bool isValidMove(int x, int y, int rows, int cols, vector<vector<bool>> &visited) {
+    //To ensure the moves are still inclusive of the chessboard area
+    return (x >= 0 && x < rows && y >= 0 && y < cols && !visited[x][y]);
+}
+```
+This function verifies if the knight's move stays within the board boundaries (within the given rows and columns) and ensures the square hasn't been visited yet. If both conditions are met, it returns `true`.
