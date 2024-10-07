@@ -121,3 +121,113 @@ bool isValidMove(int x, int y, int rows, int cols, vector<vector<bool>> &visited
 }
 ```
 This function verifies if the knight's move stays within the board boundaries (within the given rows and columns) and ensures the square hasn't been visited yet. If both conditions are met, it returns `true`.
+
+## Chinese Postman Problem
+  
+  <img width="518" alt="Screenshot 2024-10-07 at 18 36 26" src="https://github.com/user-attachments/assets/2237a712-a1ee-4d43-95ff-e3b29020b87e">
+
+  ### Steps
+  * Step 1: At first, we will list all the odd-degree vertices of the graph.
+  * Step 2: Now, we will list all the possible pairs of the odd vertices, which means all of them...
+  * Step 3: For each odd pairing, find the edge that connects the vertices with the minimum or least weight.
+  * Step 4: Then, we will find the pairings so that the sum of the weights of the edges is minimized.
+  * Step 5: Now, On the original graph, we will add the edges that have been found in Step 4.
+  * Step 6: The length of an optimal Chinese postman or route inspection path is the sum of all the edges of the graph added to the total   found in Step 4.
+  * Step 7: Finally, we can find the route corresponding to this minimum sum path can then be easily found.
+
+  1 - 2 = 10
+  1 - 3 = 2
+  1 - 3 = 7
+  2 - 3 = 5
+  
+  hence the minimum, or least weight would be 1 - 3 (edge 3), with the cost of 2
+
+  ### Code
+
+  ```
+  void dfs(int v) {
+    if (mark[v]) return;
+    mark[v] = true;
+    for (int i = 0; i < n; i++) {
+        if (a[v][i] < INF)
+            dfs(i);
+    }
+  }
+```
+
+```
+int rec(int mask) {
+    int &res = mem[mask];
+    if (res != -1) return res;
+    if (mask == 0) return res = 0;
+    res = INF;
+    int i1;
+    for (i1 = 0; (mask & (1 << i1)) == 0; i1++);
+    for (int i2 = i1 + 1; i2 < n; i2++) {
+        if (mask & (1 << i2)) {
+            int newCost = d[i1][i2] + rec(mask ^ (1 << i1) ^ (1 << i2));
+            if (newCost < res) {
+                res = newCost;
+            }
+        }
+    }
+    return res;
+}
+```
+
+```
+oid reconstructPath(int u, int v) {
+    if (d[u][v] == a[u][v]) {
+        for (auto &[cost, edgeId] : edgeMap[{min(u, v), max(u, v)}]) {
+            if (cost == a[u][v]) {
+                edgeSequence.push_back(edgeId);
+                break;
+            }
+        }
+    } else {
+        for (int k = 0; k < n; k++) {
+            if (d[u][v] == d[u][k] + d[k][v]) {
+                reconstructPath(u, k);
+                reconstructPath(k, v);
+                return;
+            }
+        }
+    }
+}
+```
+
+```
+for (int i = 0; i < m; i++) {
+    int edgeId, x, y, c;
+    cin >> edgeId >> x >> y >> c;
+    x--; y--;
+    a[x][y] = min(a[x][y], c);
+    a[y][x] = min(a[y][x], c);
+    sum += c;
+    deg[x]++, deg[y]++;
+    edgeMap[{min(x, y), max(x, y)}].push_back({c, edgeId});
+}
+```
+
+```
+memcpy(d, a, sizeof a);
+for (int k = 0; k < n; k++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+        }
+    }
+}
+```
+
+```
+memcpy(d, a, sizeof a);
+for (int k = 0; k < n; k++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+        }
+    }
+}
+```
+
