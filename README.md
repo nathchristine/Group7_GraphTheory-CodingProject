@@ -135,10 +135,10 @@ This function verifies if the knight's move stays within the board boundaries (w
   * Step 6: The length of an optimal Chinese postman or route inspection path is the sum of all the edges of the graph added to the total   found in Step 4.
   * Step 7: Finally, we can find the route corresponding to this minimum sum path can then be easily found.
 
-  1 - 2 = 10
-  1 - 3 = 2
-  1 - 3 = 7
-  2 - 3 = 5
+  1 - 2 = 10 <br>
+  1 - 3 = 2 <br>
+  1 - 3 = 7 <br>
+  2 - 3 = 5 <br>
   
   hence the minimum, or least weight would be 1 - 3 (edge 3), with the cost of 2
 
@@ -154,6 +154,8 @@ This function verifies if the knight's move stays within the board boundaries (w
     }
   }
 ```
+
+This DFS function checks whether the graph is connected by visiting all reachable nodes from a starting point.This will ensure that the graph is solvable becauuse eulerian circuit or path requires a connected graph
 
 ```
 int rec(int mask) {
@@ -174,6 +176,8 @@ int rec(int mask) {
     return res;
 }
 ```
+
+This function's purpose is to match nodes with odd degrees in pairs to minimize the additional cost required to make all degrees even a necessary condition for an Eulerian path/circuit. As stated in step 6.
 
 ```
 oid reconstructPath(int u, int v) {
@@ -196,6 +200,8 @@ oid reconstructPath(int u, int v) {
 }
 ```
 
+Selects the shortest path between nodes u and v into direct edges and keeps track of their ids. This allows the program to determine the exact sequence of edges that make up the path, for the final output of the edges used in the optimal solution.
+
 ```
 for (int i = 0; i < m; i++) {
     int edgeId, x, y, c;
@@ -209,16 +215,7 @@ for (int i = 0; i < m; i++) {
 }
 ```
 
-```
-memcpy(d, a, sizeof a);
-for (int k = 0; k < n; k++) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
-        }
-    }
-}
-```
+This is the user input section, the input will be amount of nodes, amount of edges, edge id, the nodes connected, and cost, lastly the starting and end node of the graph.
 
 ```
 memcpy(d, a, sizeof a);
@@ -230,4 +227,26 @@ for (int k = 0; k < n; k++) {
     }
 }
 ```
+
+this section computes all-pairs shortest paths using the Floyd-Warshall algorithm
+
+```
+cout << res << "\n";
+edgeSequence.clear();
+for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+        if ((deg[i] % 2 == 1) && (deg[j] % 2 == 1)) {
+            reconstructPath(i, j);
+        }
+    }
+}
+
+cout << "Edges: ";
+for (int edge : edgeSequence) {
+    cout << edge << " ";
+}
+cout << "\n";
+```
+
+Lastly, the main function
 
