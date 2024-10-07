@@ -4,15 +4,6 @@
 #include <algorithm>
 using namespace std;
 
-void addEdge(vector <pair<int, int> > adj[], int u, int v, int wt, int name)
-{
-    adj[u-1][v-1].first = min (wt, adj[u-1][v-1].first);
-    adj[v-1][u-1].first = min (wt, adj[v-1][u-1].first);
-
-    adj[u-1][v-1].second = name;
-    adj[v-1][u-1].second = name;
-}
-
 void tsp (int start, int v, vector<pair<int, int> > graph[]) {
   vector<int> vertex; 
   for (int i = 0; i < v; i++) {
@@ -67,7 +58,11 @@ int main()
   for (int i = 0; i < e; i++) {
     int ver1, ver2, weight, name;
     cin >> name >> ver1 >> ver2 >> weight;
-    addEdge(graph, ver1, ver2, weight, name);
+
+    graph[ver1-1][ver2-1].first = min (weight, graph[ver1-1][ver2-1].first);
+    graph[ver2-1][ver1-1].first = min (weight, graph[ver2-1][ver1-1].first);
+    graph[ver1-1][ver2-1].second = name;
+    graph[ver2-1][ver1-1].second = name;
   }
 
   cin >> start;
