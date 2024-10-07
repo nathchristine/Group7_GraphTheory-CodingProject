@@ -39,7 +39,10 @@ void tsp (int start, int v, vector<pair<int, int> > graph[]) {
   cout << "Cost: " << min_cost << endl;
   cout << "Route: ";
   for (int i = 0; i < best_route.size(); i++) {
-      cout << best_route[i] << " ";
+      cout << best_route[i];
+      if (i < best_route.size() - 1) {
+          cout << ", ";
+      }
   }
 }
 
@@ -59,10 +62,12 @@ int main()
     int ver1, ver2, weight, name;
     cin >> name >> ver1 >> ver2 >> weight;
 
-    graph[ver1-1][ver2-1].first = min (weight, graph[ver1-1][ver2-1].first);
-    graph[ver2-1][ver1-1].first = min (weight, graph[ver2-1][ver1-1].first);
-    graph[ver1-1][ver2-1].second = name;
-    graph[ver2-1][ver1-1].second = name;
+    if (graph[ver1-1][ver2-1].first > weight && graph[ver2-1][ver1-1].first > weight) {
+      graph[ver1-1][ver2-1].first = weight;
+      graph[ver2-1][ver1-1].first = weight;
+      graph[ver1-1][ver2-1].second = name;
+      graph[ver2-1][ver1-1].second = name;
+    } 
   }
 
   cin >> start;
