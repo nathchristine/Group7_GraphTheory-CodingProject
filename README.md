@@ -31,14 +31,16 @@ for (int i = 0; i < e; i++) {
     int ver1, ver2, weight, name;
     cin >> name >> ver1 >> ver2 >> weight;
 
-    adj[u-1][v-1].first = min (wt, adj[u-1][v-1].first);
-    adj[v-1][u-1].first = min (wt, adj[v-1][u-1].first);
-    adj[u-1][v-1].second = name;
-    adj[v-1][u-1].second = name;
+    if (graph[ver1-1][ver2-1].first > weight && graph[ver2-1][ver1-1].first > weight) {
+      graph[ver1-1][ver2-1].first = weight;
+      graph[ver2-1][ver1-1].first = weight;
+      graph[ver1-1][ver2-1].second = name;
+      graph[ver2-1][ver1-1].second = name;
+    } 
   }
 ```
 * Read the vertices, weight, name as many as the number of edges from the input and add them to the graph.
-* Updates the graph to store the minimum weight for the edge between u and v and assigns the name to the edge.
+* Updates the graph to store the minimum weight for the edge between ver1 and ver2 while also updating the name to the edge.
 
 ```
 cin >> start;
@@ -95,9 +97,9 @@ do {
 * Generates all possible permutations of the vertices excluding the starting vertex.
 * Store the cost and route of each permutation in `current_cost` and `current_route`.
 * The inner for loop iterates through the vertices in the current permutation starting from `k` which was set to the starting vertex:
-    * Adds the weight of the edge from the current vertex k to the next vertex in the permutation to `current_cost` adn the name of the edge to `current_route`.
-    * Update `k` to the next vertex in the permutation.
-* After the for loop completes, adds the weight of the edge from the last vertex in the permutation back to the starting vertex to `current_cos`t and adds the name of this edge to `current_route`.
+    * Adds the weight of the edge from the current vertex `k` to the next vertex `vetrex[i]` in the permutation to `current_cost` and the name of the edge to `current_route`.
+    * Update `k` to the next vertex `vetrex[i]` in the permutation.
+* After the for loop completes, adds the weight of the edge from the last vertex in the permutation back to the starting vertex to `current_cost` and adds the name of this edge to `current_route`.
 * Check if the current permutation cost less `min_cost` found so far.
     *  If it is, update `min_cost` to `current_cost`, and `best_route` to `current_route`.
 * Continue to generate the next permutation of the vertices using the `next_permutation`.
@@ -110,7 +112,6 @@ cout << "Cost: " << min_cost << endl;
   }
 ```
 * After all permutation have been evaluated, print the smallest cost and best route.
-* 
 
 ## Knight Tour
 
