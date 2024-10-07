@@ -30,10 +30,15 @@ vector<pair<int, int> > graph[v];
 for (int i = 0; i < e; i++) {
     int ver1, ver2, weight, name;
     cin >> name >> ver1 >> ver2 >> weight;
-    addEdge(graph, ver1, ver2, weight, name);
+
+    adj[u-1][v-1].first = min (wt, adj[u-1][v-1].first);
+    adj[v-1][u-1].first = min (wt, adj[v-1][u-1].first);
+    adj[u-1][v-1].second = name;
+    adj[v-1][u-1].second = name;
   }
 ```
-* Read the vertices, weight, name as many as the number of edges from the input and adds them to the graph using the addEdge function.
+* Read the vertices, weight, name as many as the number of edges from the input and add them to the graph.
+* Updates the graph to store the minimum weight for the edge between u and v and assigns the name to the edge.
 
 ```
 cin >> start;
@@ -41,22 +46,6 @@ tsp(start-1, v, graph);
 ```
 * Reads the starting vertex start and calls the tsp function to solve the Traveling Salesman Problem
 <br>
-
-
-### Add Edge Function
-```
-void addEdge(vector <pair<int, int> > adj[], int u, int v, int wt, int name)
-{
-    adj[u-1][v-1].first = min (wt, adj[u-1][v-1].first);
-    adj[v-1][u-1].first = min (wt, adj[v-1][u-1].first);
-
-    adj[u-1][v-1].second = name;
-    adj[v-1][u-1].second = name;
-}
-```
-* Updates the adjacency list to store the minimum weight for the edge between u and v and assigns the name to the edge.
-<br>
-
 
 ### TSP Function
 ```
