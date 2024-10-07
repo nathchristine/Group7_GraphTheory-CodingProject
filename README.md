@@ -155,7 +155,53 @@ This function serves to move the knight around the chessboard. It starts by mark
 
 If not, the function goes through all the possible moves the knight can make. For each move, it calculates the new position and uses the isValidMove function to check if it's a valid move. If the move is valid, the function calls itself to keep exploring that path.
 
-If any of these recursive calls lead to a solution, it returns true. If none of the moves work, the function backtracks by unmarking the square and removing it from the path before trying other moves.
+If any of these recursive calls lead to a solution, it returns true. If none of the moves work, the function backtracks by unmarked the square and removing it from the path before trying other moves.
+
+```
+vector<pair<int, int>> knightTourAnticlockwise(int rows, int cols, int startX, int startY) {
+    //The order of movements in an "anticlockwise" manner
+    vector<pair<int, int>> moves = {
+        {2, -1}, {1, -2}, 
+        {-1, -2}, {-2, -1}, 
+        {-2, 1}, {-1, 2}, 
+        {1, 2}, {2, 1}
+    };
+    
+    //Initiating visited coordinates and path
+    vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+    vector<pair<int, int>> path;
+
+    backtrack(startX, startY, 0, rows, cols, visited, path, moves);
+
+    return path; 
+}
+```
+
+This function aims to move the knight counterclockwise around the chessboard. It makes use of a `moves` vector, which starts in the upper-left corner and moves counterclockwise to list every possible knight move. A visited matrix, which indicates the squares that have already been visited, is used to record the knight's progress.
+
+The 'backtrack' method, which starts from the original point and looks for a legitimate path for the knight, is the central component of the function. It examines possible moves recursively and turns around if a move results in a dead end. Once a complete path is found, the function returns it.
+
+```
+int main() {
+    int rows, cols, startX, startY;
+
+    cin >> rows;
+    cin >> cols;
+
+    cin >> startX;
+    cin >> startY;
+
+    vector<pair<int, int>> result = knightTourAnticlockwise(rows, cols, startX, startY);
+
+    for (auto coordinate : result) {
+        cout << coordinate.first << ' ' << coordinate.second << endl;
+    }
+
+    return 0;
+}
+```
+
+Finally, the program executes in the main function. It accepts input for the knight's starting location (`startX`, `startY`) and board size (`rows`, `cols`). Additionally, the `knightTourActiclockwise` function determines the knight's tour oath, and the path (coordinates) the knight has followed is then printed out.
 
 
 ## Chinese Postman Problem
