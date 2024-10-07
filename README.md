@@ -53,7 +53,7 @@ tsp(start-1, v, graph);
 ```
 void tsp (int start, int v, vector<pair<int, int> > graph[])
 ```
-* This function takes three parameters: the starting vertex start, the number of vertices v, and the adjacency list graph
+* This function takes three parameters: the starting vertex `start`, the number of vertices `v`, and the adjacency list `graph`
 
 ```
 vector<int> vertex; 
@@ -94,7 +94,7 @@ do {
       }
   } while (next_permutation(vertex.begin(), vertex.end()));
 ```
-* Generates all possible permutations of the vertices excluding the starting vertex.
+* The Do-While loop generates all possible permutations of the vertices excluding the starting vertex.
 * Store the cost and route of each permutation in `current_cost` and `current_route`.
 * The inner for loop iterates through the vertices in the current permutation starting from `k` which was set to the starting vertex:
     * Adds the weight of the edge from the current vertex `k` to the next vertex `vetrex[i]` in the permutation to `current_cost` and the name of the edge to `current_route`.
@@ -108,7 +108,10 @@ do {
 cout << "Cost: " << min_cost << endl;
   cout << "Route: ";
   for (int i = 0; i < best_route.size(); i++) {
-      cout << best_route[i] << " ";
+      cout << best_route[i];
+      if (i < best_route.size() - 1) {
+          cout << ", ";
+      }
   }
 ```
 * After all permutation have been evaluated, print the smallest cost and best route.
