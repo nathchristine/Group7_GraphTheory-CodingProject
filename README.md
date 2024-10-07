@@ -122,6 +122,42 @@ bool isValidMove(int x, int y, int rows, int cols, vector<vector<bool>> &visited
 ```
 This function verifies if the knight's move stays within the board boundaries (within the given rows and columns) and ensures the square hasn't been visited yet. If both conditions are met, it returns `true`.
 
+```
+bool backtrack(int x, int y, int moveCount, int rows, int cols, vector<vector<bool>> &visited, vector<pair<int, int>> &path, vector<pair<int, int>> &moves) {
+    //To keep track of the Visited Coordinates
+    visited[x][y] = true;  
+    path.push_back({x, y});  
+    
+    // "-1" from total (rows * cols) because the 24th move visits the last coordinate
+    if (moveCount == rows * cols - 1) {
+        return true;  
+    }
+    
+    //Recursively goes through all possible movements
+    for (auto move : moves) {
+        int newX = x + move.first;
+        int newY = y + move.second;
+        if (isValidMove(newX, newY, rows, cols, visited)) {
+            if (backtrack(newX, newY, moveCount + 1, rows, cols, visited, path, moves)) {
+                return true; 
+            }
+        }
+    }
+    
+    //If no movements introduce a different coordinate
+    visited[x][y] = false;
+    path.pop_back();
+    return false; 
+}
+
+```
+This function serves to move the knight around the chessboard. It starts by marking the current square as visited `(x,y)` and puts it in a path. The function then checks to see if the knight has visited every square on the board. If that is the case, then it returns true, which means a valid solution has been found.
+
+If not, the function goes through all the possible moves the knight can make. For each move, it calculates the new position and uses the isValidMove function to check if it's a valid move. If the move is valid, the function calls itself to keep exploring that path.
+
+If any of these recursive calls lead to a solution, it returns true. If none of the moves work, the function backtracks by unmarking the square and removing it from the path before trying other moves.
+
+
 ## Chinese Postman Problem
   
   <img width="518" alt="Screenshot 2024-10-07 at 18 36 26" src="https://github.com/user-attachments/assets/2237a712-a1ee-4d43-95ff-e3b29020b87e">
