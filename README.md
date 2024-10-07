@@ -110,3 +110,6 @@ cout << "Cost: " << min_cost << endl;
   }
 ```
 * After all permutation have been evaluated, print the smallest cost and best route.
+* 
+
+## Knight Tour
