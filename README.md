@@ -212,7 +212,9 @@ Finally, the program executes in the main function. It accepts input for the kni
 
 
 ## Chinese Postman Problem
-  
+
+   CPP calculates minimum circuit path that visits all the edges of the graph at least once. To find the minimum Chinese postman path, we must walk through each edge of the graph at least once, and in addition, we must also travel along the least pairings of the odd vertices on one extra occasion.
+
   <img width="518" alt="Screenshot 2024-10-07 at 18 36 26" src="https://github.com/user-attachments/assets/2237a712-a1ee-4d43-95ff-e3b29020b87e">
 
   ### Steps
