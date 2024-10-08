@@ -118,6 +118,9 @@ cout << "Cost: " << min_cost << endl;
 
 ## Knight Tour
 
+<img width="520" alt="Screenshot 2024-10-08 at 12 35 48 PM" src="https://github.com/user-attachments/assets/d2e88da0-4802-421c-a8bc-fb94649eae23">
+
+
 ```
 bool isValidMove(int x, int y, int rows, int cols, vector<vector<bool>> &visited) {
     //To ensure the moves are still inclusive of the chessboard area
