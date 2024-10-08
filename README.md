@@ -226,12 +226,12 @@ Finally, the program executes in the main function. It accepts input for the kni
   * Step 6: The length of an optimal Chinese postman or route inspection path is the sum of all the edges of the graph added to the total   found in Step 4.
   * Step 7: Finally, we can find the route corresponding to this minimum sum path can then be easily found.
 
-  1 - 2 = 10 <br>
-  1 - 3 = 2 <br>
-  1 - 3 = 7 <br>
-  2 - 3 = 5 <br>
+    1 - 2 = 10 <br>
+    1 - 3 = 2 <br>
+    1 - 3 = 7 <br>
+    2 - 3 = 5 <br>
   
-  hence the minimum, or least weight would be 1 - 3 (edge 3), with the cost of 2
+    hence the minimum, or least weight would be 1 - 3 (edge 3), with the cost of 2
 
   ### Code
 
