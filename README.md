@@ -181,7 +181,7 @@ vector<pair<int, int>> knightTourAnticlockwise(int rows, int cols, int startX, i
 }
 ```
 
-This function aims to move the knight counterclockwise around the chessboard. It makes use of a `moves` vector, which starts in the upper-left corner and moves counterclockwise to list every possible knight move. A visited matrix, which indicates the squares that have already been visited, is used to record the knight's progress.
+This function aims to move the knight counterclockwise around the chessboard. It makes use of a `moves` vector, which starts in the right side of the chessboard and moves counterclockwise to list every possible knight move. A visited matrix, which indicates the squares that have already been visited, is used to record the knight's progress.
 
 The 'backtrack' method, which starts from the original point and looks for a legitimate path for the knight, is the central component of the function. It examines possible moves recursively and turns around if a move results in a dead end. Once a complete path is found, the function returns it.
 
